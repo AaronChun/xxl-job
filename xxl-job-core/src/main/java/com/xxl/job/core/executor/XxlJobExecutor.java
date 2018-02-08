@@ -63,7 +63,7 @@ public class XxlJobExecutor implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        XxlJobExecutor.applicationContext = applicationContext;
     }
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
@@ -110,12 +110,14 @@ public class XxlJobExecutor implements ApplicationContextAware {
         if (adminAddresses!=null && adminAddresses.trim().length()>0) {
             for (String address: adminAddresses.trim().split(",")) {
                 if (address!=null && address.trim().length()>0) {
-                    String addressUrl = address.concat(AdminBiz.MAPPING);
+                    String addressUrl = address.concat(AdminBiz.MAPPING);//TODO:对配置address做容错处理，如末尾有两个/等情况。
                     AdminBiz adminBiz = (AdminBiz) new NetComClientProxy(AdminBiz.class, addressUrl, accessToken).getObject();
                     if (adminBizList == null) {
                         adminBizList = new ArrayList<AdminBiz>();
                     }
                     adminBizList.add(adminBiz);
+                }else {
+                	//TODO:日志提示
                 }
             }
         }

@@ -140,6 +140,13 @@
 			<artifactId>xxl-job-core</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		
+		<!-- ojdbc6 -->
+		<dependency>
+			  <groupId>com.oracle</groupId>
+			  <artifactId>ojdbc6</artifactId>
+			  <version>11.2.0.1</version>
+		</dependency>
 
 	</dependencies>
 
